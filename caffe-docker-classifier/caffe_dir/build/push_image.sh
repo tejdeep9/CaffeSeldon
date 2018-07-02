@@ -1,0 +1,1 @@
+docker push 192.168.99.100:30001/caffeclassifier:0.1
