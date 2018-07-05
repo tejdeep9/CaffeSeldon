@@ -1,1 +1,1 @@
-docker build --force-rm=true -t 192.168.99.100:30001/caffeclassifier:0.1 .
+docker build --force-rm=true -t tejdeep9/caffeclassifier:0.1 .

@@ -1,16 +1,14 @@
-FROM python:2
+FROM caffe2ai/caffe2
 
-LABEL "docker_repo"="192.168.99.100:30001"
+LABEL "docker_repo"="tejdeep9"
 LABEL "docker_image_name"="caffeclassifier"
 LABEL "docker_image_version"="0.1"
 LABEL "service_type"="MODEL"
-LABEL "base_image"="python:2"
+LABEL "base_image"="caffe2ai/caffe2"
 LABEL "model_name"="CaffeClassifier"
 LABEL "persistence"="0"
 LABEL "api_type"="REST"
 
-RUN apt-get update -y
-RUN apt-get install -y python-pip python-dev build-essential
 
 COPY /requirements.txt /tmp/
 COPY /seldon_requirements.txt /tmp/
