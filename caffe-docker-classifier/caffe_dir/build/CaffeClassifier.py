@@ -7,9 +7,9 @@ class CaffeClassifier(object):
     
     def __init__(self):
        
-        with open('/microservice/init_net.pb') as f:
+        with open('init_net.pb', 'rb') as f:
             init_net = f.read()
-        with open('/microservice/predict_net.pb') as f:
+        with open('predict_net.pb', 'rb') as f:
             predict_net = f.read()
 
         self.model = workspace.Predictor(init_net, predict_net)
@@ -28,6 +28,10 @@ class CaffeClassifier(object):
 
         encoded = imagestring.encode('utf-8')
         decoded = base64.b64decode(encoded)
-        img = np.frombuffer(decoded, dtype = data_type).reshape(shape)
+        img = np.frombuffer(decoded, dtype = np.float32).reshape(shape)
         
-        return self.model.run({'data': img})
+        result = self.model.run([img])
+        np.shape(result)
+        print type(result)
+        print np.shape(result)
+        return result
