@@ -15,16 +15,19 @@ class CaffeClassifier(object):
         self.model = workspace.Predictor(init_net, predict_net)
 
  
-    def predict(self,X,feature_names):
-        data_type = X[0]
-        imagestring = X[1]
-        shape = X[2]
+    def predict(self,X,feature_names):       
+
+        data = X.item(0).decode('utf-8')
+        elem = json.loads(data);
+        data_type = elem[0]
+        imagestring = elem[1]
+        shape = elem[2]
         print data_type
-        print encoded
+        #print imagestring
         print shape
-        
+
         encoded = imagestring.encode('utf-8')
         decoded = base64.b64decode(encoded)
-        img = np.frombuffer(decoded, dtype = array_data_type).reshape(array_shape)
+        img = np.frombuffer(decoded, dtype = data_type).reshape(shape)
         
         return self.model.run({'data': img})
